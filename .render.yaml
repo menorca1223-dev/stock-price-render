@@ -1,0 +1,7 @@
+services:
+  - type: worker
+    name: stock-price-fetcher
+    env: python
+    buildCommand: ""
+    startCommand: "python get_stock_data.py"
+    schedule: "daily"
