@@ -1,0 +1,18 @@
+---
+- name: 株価取得スクリプトの実行
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: 必要なPythonパッケージをインストール
+      pip:
+        name:
+          - yfinance
+          - pandas
+          - openpyxl
+        executable: pip3
+
+    - name: 株価取得スクリプトを実行
+      command: python3 get_stock_data.py
+      args:
+        chdir: "/mnt/c/Users/atush/OneDrive/デスクトップ/株価"
