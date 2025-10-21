@@ -26,7 +26,8 @@ jobs:
         run: python get_stock_data.py
 
       - name: Upload Excel
-        uses: actions/upload-artifact@v3
-        with:
-          name: stock-data
-          path: output/*.xlsx
+  uses: actions/upload-artifact@v3
+  with:
+    name: stock-data
+    path: output/*.xlsx
+
