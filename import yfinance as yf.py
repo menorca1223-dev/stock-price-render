@@ -14,11 +14,11 @@ stocks = {
 today = datetime.today().strftime('%Y_%m_%d')
 filename = f"株価_{today}.xlsx"
 
-# 保存先ディレクトリ（WSL形式のパスに修正）
-save_dir = "/mnt/c/Users/atush/OneDrive/デスクトップ/株価"
-os.makedirs(save_dir, exist_ok=True)  # フォルダがなければ作成
+# 保存先ディレクトリ（GitHub Actionsではローカルに保存）
+save_dir = "output"
+os.makedirs(save_dir, exist_ok=True)
 
-# フルパスでファイル名を指定
+# ファイルパス
 filepath = os.path.join(save_dir, filename)
 
 # Excelファイルに各銘柄のデータを書き込む
@@ -30,3 +30,4 @@ with pd.ExcelWriter(filepath, engine='openpyxl', mode='a' if os.path.exists(file
             df.to_excel(writer, sheet_name=label, index=False)
         except Exception as e:
             print(f"{label}（{code}）の取得に失敗しました: {e}")
+
