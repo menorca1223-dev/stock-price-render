@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: リポジトリをチェックアウト
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Python をセットアップ
         uses: actions/setup-python@v4
@@ -28,3 +28,4 @@ jobs:
         with:
           name: stock-data
           path: output/*.xlsx
+
