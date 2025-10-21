@@ -1,3 +1,5 @@
+print("✅ スクリプト開始しました")
+
 import os
 from datetime import datetime
 import pandas as pd
