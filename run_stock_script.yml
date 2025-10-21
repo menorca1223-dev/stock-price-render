@@ -18,9 +18,10 @@
         chdir: "/mnt/c/Users/atush/OneDrive/デスクトップ/株価"
 
       - name: Upload Excel file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: stock-data
           path: output/*.xlsx
+
 
 
