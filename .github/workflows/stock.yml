@@ -1,0 +1,30 @@
+name: Run Stock Script
+
+on:
+  workflow_dispatch:  # 手動実行を可能にする
+  schedule:
+    - cron: '0 * * * *'  # 毎時0分に実行（UTC）
+
+jobs:
+  run-stock-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install packages
+        run: pip install yfinance pandas openpyxl
+
+      - name: Run script
+        run: python get_stock_data.py
+
+      - name: Upload Excel
+        uses: actions/upload-artifact@v3
+        with:
+          name: stock-data
+          path: output/*.xlsx
