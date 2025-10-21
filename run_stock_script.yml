@@ -16,3 +16,10 @@
       command: python3 get_stock_data.py
       args:
         chdir: "/mnt/c/Users/atush/OneDrive/デスクトップ/株価"
+
+      - name: Upload Excel file
+        uses: actions/upload-artifact@v3
+        with:
+          name: stock-data
+          path: output/*.xlsx
+
