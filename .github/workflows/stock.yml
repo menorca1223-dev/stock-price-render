@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: '0 * * * *'
 
-jobs:
+jobs:  # ← ここが1回だけ必要
   run-stock-script:
     runs-on: ubuntu-latest
     steps:
@@ -26,8 +26,7 @@ jobs:
         run: python get_stock_data.py
 
       - name: Upload Excel
-  uses: actions/upload-artifact@v3
-  with:
-    name: stock-data
-    path: output/*.xlsx
-
+        uses: actions/upload-artifact@v3
+        with:
+          name: stock-data
+          path: output/*.xlsx
