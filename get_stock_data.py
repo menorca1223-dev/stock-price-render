@@ -32,3 +32,6 @@ with pd.ExcelWriter(filepath, engine='openpyxl', mode='a' if os.path.exists(file
             df.to_excel(writer, sheet_name=label, index=False)
         except Exception as e:
             print(f"{label}（{code}）の取得に失敗しました: {e}")
+
+# ✅ 保存完了ログをここに追加！
+print(f"✅ 保存完了: {filepath}")
