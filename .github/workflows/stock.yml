@@ -1,9 +1,9 @@
 name: Run Stock Script
 
 on:
-  workflow_dispatch:  # 手動実行を可能にする
+  workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'  # 毎時0分に実行（UTC）
+    - cron: '0 * * * *'
 
 jobs:
   run-stock-script:
@@ -26,8 +26,7 @@ jobs:
         run: python get_stock_data.py
 
       - name: Upload Excel
-  uses: actions/upload-artifact@v3
-  with:
-    name: stock-data
-    path: output/*.xlsx
-
+        uses: actions/upload-artifact@v3
+        with:
+          name: stock-data
+          path: output/*.xlsx
