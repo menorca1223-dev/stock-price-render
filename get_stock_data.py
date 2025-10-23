@@ -1,37 +1,36 @@
-print("✅ スクリプト開始しました")
-
-import os
-from datetime import datetime
-import pandas as pd
 import yfinance as yf
+import pandas as pd
+from datetime import datetime
+import os
 
-# 取得対象の銘柄（Yahoo Financeのコード）
+# ✅ 指定された銘柄コードとラベル
 stocks = {
     "7203.T": "トヨタ自動車",
     "6460.T": "セガサミーHD",
     "3765.T": "ガンホー"
 }
 
-# 今日の日付をファイル名に使用
-today = datetime.today().strftime('%Y_%m_%d')
-filename = f"株価_{today}.xlsx"
+# 出力フォルダの作成
+output_dir = "output"
+os.makedirs(output_dir, exist_ok=True)
 
-# 保存先ディレクトリ（GitHub Actionsではローカルに保存）
-save_dir = "output"
-os.makedirs(save_dir, exist_ok=True)
+# 日付付きファイル名
+timestamp = datetime.now().strftime("%Y%m%d_%H%M")
+filename = f"{output_dir}/stock_data_{timestamp}.xlsx"
 
-# ファイルパス
-filepath = os.path.join(save_dir, filename)
-
-# Excelファイルに各銘柄のデータを書き込む
-with pd.ExcelWriter(filepath, engine='openpyxl', mode='a' if os.path.exists(filepath) else 'w') as writer:
+# ExcelWriterで複数シートに保存
+with pd.ExcelWriter(filename, engine="openpyxl") as writer:
     for code, label in stocks.items():
-        try:
-            df = yf.Ticker(code).history(interval="60m", period="1d")
-            df.reset_index(inplace=True)
-            df.to_excel(writer, sheet_name=label, index=False)
-        except Exception as e:
-            print(f"{label}（{code}）の取得に失敗しました: {e}")
+        print(f"取得中: {label}（{code}）")
 
-# ✅ 保存完了ログをここに追加！
-print(f"✅ 保存完了: {filepath}")
+        # データ取得（過去1日分の1時間足）
+        df = yf.Ticker(code).history(interval="60m", period="1d")
+
+        if df.empty:
+            print(f"⚠️ データなし: {label}（{code}）")
+            continue
+
+        df.reset_index(inplace=True)
+        df.to_excel(writer, sheet_name=label, index=False)
+
+print(f"✅ 完了: {filename}")
