@@ -17,10 +17,9 @@ jobs:
 
       - name: 株価取得スクリプトを実行
         run: python3 get_stock_data.py
-        working-directory: ./path/to/your/script
 
       - name: Excelファイルをアップロード
         uses: actions/upload-artifact@v4
         with:
           name: stock-data
-          path: ./path/to/your/script/output/*.xlsx
+          path: output/*.xlsx
