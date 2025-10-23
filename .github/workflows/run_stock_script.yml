@@ -1,7 +1,9 @@
 name: Run Stock Script
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # 手動実行も可能
+  schedule:           # 毎時0分に自動実行（UTC基準）
+    - cron: '0 * * * *'
 
 jobs:
   run-script:
