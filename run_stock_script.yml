@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: リポジトリをチェックアウト
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 必要なPythonパッケージをインストール
         run: |
@@ -24,3 +24,4 @@ jobs:
         with:
           name: stock-data
           path: ./path/to/your/script/output/*.xlsx
+
