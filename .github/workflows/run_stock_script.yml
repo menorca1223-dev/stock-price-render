@@ -1,0 +1,26 @@
+name: Run Stock Script
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: 必要なPythonパッケージをインストール
+        run: |
+          pip3 install yfinance pandas openpyxl
+
+      - name: 株価取得スクリプトを実行
+        run: python3 get_stock_data.py
+        working-directory: ./path/to/your/script
+
+      - name: Excelファイルをアップロード
+        uses: actions/upload-artifact@v4
+        with:
+          name: stock-data
+          path: ./path/to/your/script/output/*.xlsx
